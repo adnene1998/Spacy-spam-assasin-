@@ -3,47 +3,35 @@ import spacy
 from joblib import load
 import numpy as np
 
-import subprocess
-import sys
-import spacy
-
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
+# Charger le modèle SpaCy et le modèle ML
+nlp = spacy.load("en_core_web_sm")
+loaded_clf = load("random_forest_model.joblib")  # Charger une seule fois
 
 def preprocess(text):
     doc = nlp(text)
-    filtered_tokens = []
-    for token in doc:
-        if token.is_stop or token.is_punct:
-            continue
-        filtered_tokens.append(token.lemma_)
+    filtered_tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
     return " ".join(filtered_tokens)
 
+# Titre de l'application
+st.title("Spam Detection with Streamlit")
 
-# Title of the app
-st.title("Simple Streamlit Input Example")
-
-# Add a text input field
+# Champ de saisie
 user_input = st.text_input("Enter some text:")
 
-propcced_text = preprocess(user_input)
-
-# Display the input
 if user_input:
-    st.write(propcced_text)
+    processed_text = preprocess(user_input)
+    st.write("Processed text:", processed_text)
 
+    # Vérification que le texte n'est pas vide après prétraitement
+    if processed_text.strip():
+        doc = nlp(processed_text)
+        vector = doc.vector.reshape(1, -1)  # Transformation correcte
+
+        # Prédiction
+        result = loaded_clf.predict(vector)
+        response = ["Ham", "Spam"]
+        st.write("Prediction:", response[int(result[0])])
+    else:
+        st.write("Not enough meaningful words for prediction.")
 else:
     st.write("Please enter some text.")
-
-resp = ["ham", "spam"]
-if len(propcced_text) != 0:
-    doc = nlp(propcced_text)
-    # X_test_2d =  np.stack(doc.vector)
-    # print(X_test_2d)
-
-    loaded_clf = load("random_forest_model.joblib")
-    result = loaded_clf.predict(doc.vector.reshape(1, -1))
-    st.write(resp[int(result[0])])
