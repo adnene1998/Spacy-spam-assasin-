@@ -5,3 +5,4 @@ joblib
 pandas
 kagglehub
 en_core_web_sm
+python-pptx
