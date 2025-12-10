@@ -10,6 +10,20 @@ from pptx.enum.text import PP_ALIGN
 from pptx.dml.color import RGBColor
 from PIL import Image, ImageDraw, ImageFont
 import os
+import sys
+
+# Color constants for placeholder images
+COLOR_PLATFORM = (52, 152, 219)  # Blue
+COLOR_SEGMENTATION = (46, 204, 113)  # Green
+COLOR_MARKETING = (155, 89, 182)  # Purple
+COLOR_PERSONA_1 = (230, 126, 34)  # Orange
+COLOR_PERSONA_2 = (231, 76, 60)  # Red
+COLOR_JOURNEY = (52, 73, 94)  # Dark blue
+
+# Image dimensions
+IMAGE_WIDTH = 400
+IMAGE_HEIGHT = 300
+PERSONA_IMAGE_SIZE = 350
 
 def create_placeholder_image(text, filename, width=400, height=300, bg_color=(70, 130, 180), text_color=(255, 255, 255)):
     """Create a placeholder image with text
@@ -25,10 +39,24 @@ def create_placeholder_image(text, filename, width=400, height=300, bg_color=(70
     img = Image.new('RGB', (width, height), color=bg_color)
     draw = ImageDraw.Draw(img)
     
-    # Use default font
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
-    except:
+    # Try to load a system font with cross-platform fallback
+    font = None
+    font_paths = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+        "/System/Library/Fonts/Helvetica.ttc",  # macOS
+        "C:\\Windows\\Fonts\\arial.ttf",  # Windows
+    ]
+    
+    for font_path in font_paths:
+        try:
+            if os.path.exists(font_path):
+                font = ImageFont.truetype(font_path, 24)
+                break
+        except (OSError, IOError):
+            continue
+    
+    # Use default font if no system font found
+    if font is None:
         font = ImageFont.load_default()
     
     # Calculate text position to center it
@@ -112,17 +140,17 @@ def create_marketing_presentation():
     
     # Create images with different colors for different sections
     create_placeholder_image("Plateforme\nÉvénementiel", f"{images_dir}/platform.png", 
-                           bg_color=(52, 152, 219), width=400, height=300)
+                           bg_color=COLOR_PLATFORM, width=IMAGE_WIDTH, height=IMAGE_HEIGHT)
     create_placeholder_image("Segmentation\nMarché", f"{images_dir}/segmentation.png", 
-                           bg_color=(46, 204, 113), width=400, height=300)
+                           bg_color=COLOR_SEGMENTATION, width=IMAGE_WIDTH, height=IMAGE_HEIGHT)
     create_placeholder_image("Marketing Mix\n4P", f"{images_dir}/marketing_mix.png", 
-                           bg_color=(155, 89, 182), width=400, height=300)
+                           bg_color=COLOR_MARKETING, width=IMAGE_WIDTH, height=IMAGE_HEIGHT)
     create_placeholder_image("Thomas\n30 ans", f"{images_dir}/persona_thomas.png", 
-                           bg_color=(230, 126, 34), width=350, height=350)
+                           bg_color=COLOR_PERSONA_1, width=PERSONA_IMAGE_SIZE, height=PERSONA_IMAGE_SIZE)
     create_placeholder_image("Marc\n38 ans", f"{images_dir}/persona_marc.png", 
-                           bg_color=(231, 76, 60), width=350, height=350)
+                           bg_color=COLOR_PERSONA_2, width=PERSONA_IMAGE_SIZE, height=PERSONA_IMAGE_SIZE)
     create_placeholder_image("Parcours Client\nJourney", f"{images_dir}/customer_journey.png", 
-                           bg_color=(52, 73, 94), width=400, height=300)
+                           bg_color=COLOR_JOURNEY, width=IMAGE_WIDTH, height=IMAGE_HEIGHT)
     
     prs = Presentation()
     prs.slide_width = Inches(10)
