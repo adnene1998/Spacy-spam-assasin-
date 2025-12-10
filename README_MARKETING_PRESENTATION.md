@@ -7,10 +7,11 @@ Ce projet contient un générateur de présentation PowerPoint pour un plan mark
 La présentation générée contient **15 slides** avec **images illustratives** couvrant tous les aspects essentiels du plan marketing :
 
 ### 1. **SCP (Segmentation, Ciblage, Positionnement)**
-- **Segmentation** : Analyse détaillée de 3 segments de marché
-  - Particuliers (mariages, anniversaires, fêtes familiales)
-  - Professionnels de l'événementiel
-  - Petites entreprises et associations
+- **Segmentation** : Approche hiérarchique en 4 niveaux
+  - Segmentation primaire par genre (Hommes | Femmes)
+  - Segmentation hommes : Jeunes mariés, professionnels événementiels, entrepreneurs
+  - Segmentation femmes : Jeunes mariées, organisatrices familiales, professionnelles
+  - Segmentation transversale par budget et type d'événement
 
 - **Ciblage** : Identification des cibles principales et secondaires
   - Cible principale : Particuliers 25-45 ans, urbains

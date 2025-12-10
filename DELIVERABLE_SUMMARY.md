@@ -23,11 +23,12 @@
 - Public cible
 - Objectifs
 
-#### Slide 3 : Segmentation
-- **3 segments de marché identifiés** :
-  - Particuliers (mariages, anniversaires, fêtes familiales)
-  - Professionnels de l'événementiel
-  - Petites entreprises et associations
+#### Slide 3 : Segmentation 🖼️
+- **Approche de segmentation hiérarchique** :
+  - Niveau 1 : Segmentation primaire par genre (Hommes | Femmes)
+  - Niveau 2 : Sous-segmentation des hommes (jeunes mariés, professionnels, entrepreneurs)
+  - Niveau 3 : Sous-segmentation des femmes (jeunes mariées, organisatrices, professionnelles)
+  - Niveau 4 : Segmentation transversale par budget et type d'événement
 
 #### Slide 4 : Ciblage
 - Cible principale : Particuliers 25-45 ans

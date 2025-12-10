@@ -186,22 +186,29 @@ def create_marketing_presentation():
     # Add image on the right
     add_image_to_slide(slide, f"{images_dir}/segmentation.png", 6.5, 2.5, 3, 2.25)
     left = Inches(0.5)
-    top = Inches(2)
+    top = Inches(1.8)
     width = Inches(5.5)
-    height = Inches(4.5)
+    height = Inches(5)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
-        "Segment 1: Particuliers (mariages, anniversaires, fêtes familiales)",
-        "  - Âge: 25-55 ans",
-        "  - Revenus moyens à élevés",
-        "  - Recherchent simplicité et qualité",
-        "Segment 2: Professionnels de l'événementiel",
-        "  - Organisateurs d'événements",
-        "  - Entreprises (événements corporatifs)",
-        "  - Besoin d'outils professionnels et de gestion",
-        "Segment 3: Petites entreprises et associations",
-        "  - Budget limité",
-        "  - Événements récurrents"
+        "Processus de segmentation hiérarchique:",
+        "",
+        "1. Segmentation primaire par GENRE:",
+        "  → Hommes | Femmes",
+        "",
+        "2. Segmentation HOMMES:",
+        "  • Jeunes mariés (25-35 ans) - organisent leur mariage",
+        "  • Professionnels événementiels (30-50 ans)",
+        "  • Entrepreneurs/Entreprises - événements corporatifs",
+        "",
+        "3. Segmentation FEMMES:",
+        "  • Jeunes mariées (25-35 ans) - organisent leur mariage",
+        "  • Organisatrices familiales (30-50 ans) - fêtes familiales",
+        "  • Professionnelles événementielles (25-55 ans)",
+        "",
+        "4. Segmentation secondaire (transversale):",
+        "  • Par budget: Économique | Standard | Premium",
+        "  • Par type d'événement: Personnel | Professionnel"
     ]
     add_bullet_points(textbox, points)
     
