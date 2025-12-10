@@ -23,7 +23,13 @@ def create_content_slide(prs, title):
     return slide
 
 def add_bullet_points(textbox, points, level=0):
-    """Add bullet points to a text frame"""
+    """Add bullet points to a text frame
+    
+    Args:
+        textbox: PowerPoint textbox shape to add points to
+        points: List of strings to add as bullet points
+        level: Indentation level for bullets (default: 0)
+    """
     text_frame = textbox.text_frame
     text_frame.clear()
     
@@ -38,7 +44,17 @@ def add_bullet_points(textbox, points, level=0):
         p.font.size = Pt(18)
 
 def create_marketing_presentation():
-    """Create the complete marketing presentation"""
+    """Create the complete marketing presentation
+    
+    Creates a comprehensive 15-slide PowerPoint presentation covering:
+    - SCP (Segmentation, Targeting, Positioning)
+    - The 4 Ps of Marketing (Product, Price, Place, Promotion)
+    - Buyer Personas
+    - Ideal Buyer Journey
+    
+    Returns:
+        str: Filename of the created presentation
+    """
     prs = Presentation()
     prs.slide_width = Inches(10)
     prs.slide_height = Inches(7.5)
