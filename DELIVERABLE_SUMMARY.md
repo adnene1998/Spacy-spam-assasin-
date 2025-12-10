@@ -5,8 +5,9 @@
 ### Présentation PowerPoint Complète
 **Fichier** : `Plan_Marketing_Plateforme_Gestion_Fetes.pptx`
 - ✅ **15 slides professionnelles** au format PowerPoint
+- ✅ **6 images illustratives** intégrées dans les slides clés
 - ✅ Contenu entièrement en **français**
-- ✅ Taille : 46 KB
+- ✅ Taille : 68 KB (incluant les images)
 - ✅ Compatible avec Microsoft PowerPoint et alternatives (LibreOffice, Google Slides)
 
 ## 📋 Structure Détaillée de la Présentation
@@ -63,17 +64,19 @@
 
 ### Slides 10-11 : Buyer Personas
 
-#### Slide 10 : Sarah, 32 ans
-- Profil : Cadre en marketing, organisatrice particulière
-- Objectifs : Organiser le mariage de sa sœur
-- Défis : Manque de temps, coordination multiple
-- Comportement : Active sur réseaux sociaux
+#### Slide 10 : Thomas, 30 ans 🖼️
+- Profil : Ingénieur tech, futur marié
+- Objectifs : Organiser son propre mariage
+- Défis : Première expérience, manque de temps, coordination
+- Comportement : Valorise efficacité et technologie
+- **Avec image illustrative du persona**
 
-#### Slide 11 : Marc, 38 ans
+#### Slide 11 : Marc, 38 ans 🖼️
 - Profil : Directeur d'agence événementielle
 - Objectifs : Optimiser sa gestion d'événements
 - Défis : Gestion de projets multiples
 - Comportement : Recherche d'outils professionnels
+- **Avec image illustrative du persona**
 
 ### Slides 12-14 : Parcours d'Achat Idéal
 

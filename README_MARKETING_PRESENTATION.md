@@ -4,7 +4,7 @@ Ce projet contient un générateur de présentation PowerPoint pour un plan mark
 
 ## 📋 Contenu de la Présentation
 
-La présentation générée contient **15 slides** couvrant tous les aspects essentiels du plan marketing :
+La présentation générée contient **15 slides** avec **images illustratives** couvrant tous les aspects essentiels du plan marketing :
 
 ### 1. **SCP (Segmentation, Ciblage, Positionnement)**
 - **Segmentation** : Analyse détaillée de 3 segments de marché
@@ -41,9 +41,10 @@ La présentation générée contient **15 slides** couvrant tous les aspects ess
 ### 3. **Buyer Personas**
 Deux profils détaillés représentant les clients types :
 
-- **Sarah (32 ans)** : L'Organisatrice Particulière
-  - Cadre en marketing, organise le mariage de sa sœur
-  - Recherche gain de temps et qualité
+- **Thomas (30 ans)** : Le Futur Marié
+  - Ingénieur dans une entreprise tech, se marie dans 6 mois
+  - Organise son propre mariage avec sa fiancée
+  - Recherche efficacité, optimisation du budget et technologie
 
 - **Marc (38 ans)** : Le Professionnel de l'Événementiel
   - Directeur d'agence, gère 20-30 événements/an
@@ -77,27 +78,30 @@ Cela créera un fichier nommé `Plan_Marketing_Plateforme_Gestion_Fetes.pptx` da
 
 ## 📁 Fichiers du Projet
 
-- `create_marketing_presentation.py` : Script Python pour générer la présentation
-- `Plan_Marketing_Plateforme_Gestion_Fetes.pptx` : Présentation PowerPoint générée (15 slides)
-- `requirements.txt` : Liste des dépendances Python incluant python-pptx
+- `create_marketing_presentation.py` : Script Python pour générer la présentation avec images
+- `Plan_Marketing_Plateforme_Gestion_Fetes.pptx` : Présentation PowerPoint générée (15 slides avec images)
+- `requirements.txt` : Liste des dépendances Python incluant python-pptx et pillow
+- `presentation_images/` : Dossier contenant les images générées (automatiquement créé)
 
 ## 📊 Structure de la Présentation
 
 1. Page de titre
-2. Vue d'ensemble du projet
-3. SCP - Segmentation
+2. Vue d'ensemble du projet 🖼️
+3. SCP - Segmentation 🖼️
 4. SCP - Ciblage
 5. SCP - Positionnement
-6. Les 4P - Produit
+6. Les 4P - Produit 🖼️
 7. Les 4P - Prix
 8. Les 4P - Place
 9. Les 4P - Promotion
-10. Buyer Persona - Sarah
-11. Buyer Persona - Marc
-12. Parcours d'achat - Prise de conscience & Considération
+10. Buyer Persona - Thomas 🖼️
+11. Buyer Persona - Marc 🖼️
+12. Parcours d'achat - Prise de conscience & Considération 🖼️
 13. Parcours d'achat - Décision & Fidélisation
 14. Parcours d'achat - Vue complète avec KPIs
 15. Conclusion et prochaines étapes
+
+**Note**: 🖼️ = Slides contenant des images illustratives
 
 ## 🎯 Objectifs du Plan Marketing
 

@@ -8,6 +8,56 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
 from pptx.dml.color import RGBColor
+from PIL import Image, ImageDraw, ImageFont
+import os
+
+def create_placeholder_image(text, filename, width=400, height=300, bg_color=(70, 130, 180), text_color=(255, 255, 255)):
+    """Create a placeholder image with text
+    
+    Args:
+        text: Text to display on the image
+        filename: Filename to save the image
+        width: Image width in pixels
+        height: Image height in pixels
+        bg_color: Background color RGB tuple
+        text_color: Text color RGB tuple
+    """
+    img = Image.new('RGB', (width, height), color=bg_color)
+    draw = ImageDraw.Draw(img)
+    
+    # Use default font
+    try:
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 24)
+    except:
+        font = ImageFont.load_default()
+    
+    # Calculate text position to center it
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
+    position = ((width - text_width) // 2, (height - text_height) // 2)
+    
+    draw.text(position, text, fill=text_color, font=font)
+    img.save(filename)
+    return filename
+
+def add_image_to_slide(slide, image_path, left, top, width, height):
+    """Add an image to a slide
+    
+    Args:
+        slide: PowerPoint slide object
+        image_path: Path to the image file
+        left: Left position in inches
+        top: Top position in inches
+        width: Image width in inches (None to maintain aspect ratio)
+        height: Image height in inches (None to maintain aspect ratio)
+    """
+    if os.path.exists(image_path):
+        if width and height:
+            slide.shapes.add_picture(image_path, Inches(left), Inches(top), 
+                                    width=Inches(width), height=Inches(height))
+        else:
+            slide.shapes.add_picture(image_path, Inches(left), Inches(top))
 
 def create_title_slide(prs, title, subtitle):
     """Create a title slide"""
@@ -55,6 +105,25 @@ def create_marketing_presentation():
     Returns:
         str: Filename of the created presentation
     """
+    # Create placeholder images for the presentation
+    images_dir = "presentation_images"
+    if not os.path.exists(images_dir):
+        os.makedirs(images_dir)
+    
+    # Create images with different colors for different sections
+    create_placeholder_image("Plateforme\nÉvénementiel", f"{images_dir}/platform.png", 
+                           bg_color=(52, 152, 219), width=400, height=300)
+    create_placeholder_image("Segmentation\nMarché", f"{images_dir}/segmentation.png", 
+                           bg_color=(46, 204, 113), width=400, height=300)
+    create_placeholder_image("Marketing Mix\n4P", f"{images_dir}/marketing_mix.png", 
+                           bg_color=(155, 89, 182), width=400, height=300)
+    create_placeholder_image("Thomas\n30 ans", f"{images_dir}/persona_thomas.png", 
+                           bg_color=(230, 126, 34), width=350, height=350)
+    create_placeholder_image("Marc\n38 ans", f"{images_dir}/persona_marc.png", 
+                           bg_color=(231, 76, 60), width=350, height=350)
+    create_placeholder_image("Parcours Client\nJourney", f"{images_dir}/customer_journey.png", 
+                           bg_color=(52, 73, 94), width=400, height=300)
+    
     prs = Presentation()
     prs.slide_width = Inches(10)
     prs.slide_height = Inches(7.5)
@@ -68,9 +137,12 @@ def create_marketing_presentation():
     
     # Slide 2: Introduction - Vue d'ensemble
     slide = create_content_slide(prs, "Vue d'Ensemble du Projet")
-    left = Inches(1)
+    # Add image on the right side
+    add_image_to_slide(slide, f"{images_dir}/platform.png", 6.5, 2, 3, 2.25)
+    # Add text on the left side
+    left = Inches(0.5)
     top = Inches(2)
-    width = Inches(8)
+    width = Inches(5.5)
     height = Inches(4)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
@@ -83,9 +155,11 @@ def create_marketing_presentation():
     
     # Slide 3: SCP - Segmentation
     slide = create_content_slide(prs, "SCP - Segmentation")
-    left = Inches(1)
+    # Add image on the right
+    add_image_to_slide(slide, f"{images_dir}/segmentation.png", 6.5, 2.5, 3, 2.25)
+    left = Inches(0.5)
     top = Inches(2)
-    width = Inches(8)
+    width = Inches(5.5)
     height = Inches(4.5)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
@@ -149,9 +223,11 @@ def create_marketing_presentation():
     
     # Slide 6: Les 4P - Produit
     slide = create_content_slide(prs, "Les 4P - Produit (Product)")
-    left = Inches(1)
+    # Add image
+    add_image_to_slide(slide, f"{images_dir}/marketing_mix.png", 6.5, 2.5, 3, 2.25)
+    left = Inches(0.5)
     top = Inches(2)
-    width = Inches(8)
+    width = Inches(5.5)
     height = Inches(4.5)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
@@ -241,37 +317,45 @@ def create_marketing_presentation():
     add_bullet_points(textbox, points)
     
     # Slide 10: Buyer Persona - Profil 1
-    slide = create_content_slide(prs, "Buyer Persona - Sarah, l'Organisatrice Particulière")
-    left = Inches(1)
+    slide = create_content_slide(prs, "Buyer Persona - Thomas, le Futur Marié")
+    # Add persona image on the left
+    add_image_to_slide(slide, f"{images_dir}/persona_thomas.png", 0.5, 2, 2.8, 2.8)
+    # Add text on the right
+    left = Inches(3.5)
     top = Inches(1.8)
-    width = Inches(8)
+    width = Inches(6)
     height = Inches(5)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
         "Démographie:",
-        "  - 32 ans, mariée, 1 enfant",
-        "  - Cadre dans une entreprise de marketing",
+        "  - 30 ans, fiancé, va se marier dans 6 mois",
+        "  - Ingénieur dans une entreprise tech",
         "  - Habite en zone urbaine, revenus confortables",
         "Objectifs:",
-        "  - Organiser le mariage de sa sœur",
-        "  - Créer un événement mémorable dans son budget",
-        "  - Gagner du temps dans l'organisation",
+        "  - Organiser son propre mariage",
+        "  - Créer un événement inoubliable pour lui et sa fiancée",
+        "  - Optimiser le budget et gagner du temps",
+        "  - Impressionner famille et amis",
         "Défis:",
+        "  - Première expérience d'organisation de mariage",
         "  - Manque de temps avec son travail",
         "  - Difficulté à coordonner plusieurs prestataires",
-        "  - Stress de la gestion du budget",
+        "  - Stress de la gestion du budget et des choix",
         "Comportement:",
-        "  - Recherche en ligne de solutions",
-        "  - Active sur les réseaux sociaux",
-        "  - Lit les avis avant de choisir"
+        "  - Recherche en ligne de solutions et comparaisons",
+        "  - Consulte forums et avis clients",
+        "  - Valorise l'efficacité et la technologie"
     ]
     add_bullet_points(textbox, points)
     
     # Slide 11: Buyer Persona - Profil 2
     slide = create_content_slide(prs, "Buyer Persona - Marc, le Pro de l'Événementiel")
-    left = Inches(1)
+    # Add persona image on the left
+    add_image_to_slide(slide, f"{images_dir}/persona_marc.png", 0.5, 2, 2.8, 2.8)
+    # Add text on the right
+    left = Inches(3.5)
     top = Inches(1.8)
-    width = Inches(8)
+    width = Inches(6)
     height = Inches(5)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
@@ -296,10 +380,12 @@ def create_marketing_presentation():
     
     # Slide 12: Parcours d'achat - Étape 1 & 2
     slide = create_content_slide(prs, "Parcours d'Achat Idéal - Prise de conscience & Considération")
-    left = Inches(1)
-    top = Inches(1.8)
-    width = Inches(8)
-    height = Inches(5)
+    # Add image at top
+    add_image_to_slide(slide, f"{images_dir}/customer_journey.png", 3, 1.5, 4, 1.5)
+    left = Inches(0.5)
+    top = Inches(3.2)
+    width = Inches(9)
+    height = Inches(3.8)
     textbox = slide.shapes.add_textbox(left, top, width, height)
     points = [
         "1. Prise de conscience (Awareness):",
